@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\User;
+use App\Models\Vaccination;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -27,16 +30,16 @@ class PatientSeeder extends Seeder
                 'blood_type' => 'A+',
                 'vaccinations' => [
                     [
-                        'vaccine_name' => 'COVID-19 Pfizer', 
-                        'administration_date' => '2021-03-15', 
-                        'lot_number' => 'PF12345', 
+                        'vaccine_name' => 'COVID-19 Pfizer',
+                        'administration_date' => '2021-03-15',
+                        'lot_number' => 'PF12345',
                         'next_dose_date' => '2021-06-15',
                         'doctor_email' => 'dr.jansen@example.com'
                     ],
                     [
-                        'vaccine_name' => 'Griepvaccin', 
-                        'administration_date' => '2022-10-10', 
-                        'lot_number' => 'FLU2022', 
+                        'vaccine_name' => 'Griepvaccin',
+                        'administration_date' => '2022-10-10',
+                        'lot_number' => 'FLU2022',
                         'next_dose_date' => '2023-10-01',
                         'doctor_email' => 'dr.jansen@example.com'
                     ]
@@ -53,16 +56,16 @@ class PatientSeeder extends Seeder
                 'blood_type' => 'B-',
                 'vaccinations' => [
                     [
-                        'vaccine_name' => 'COVID-19 Moderna', 
-                        'administration_date' => '2021-04-20', 
-                        'lot_number' => 'MOD456', 
+                        'vaccine_name' => 'COVID-19 Moderna',
+                        'administration_date' => '2021-04-20',
+                        'lot_number' => 'MOD456',
                         'next_dose_date' => '2021-07-20',
                         'doctor_email' => 'dr.vanveen@example.com'
                     ],
                     [
-                        'vaccine_name' => 'Tetanus', 
-                        'administration_date' => '2020-05-12', 
-                        'lot_number' => 'TET2020', 
+                        'vaccine_name' => 'Tetanus',
+                        'administration_date' => '2020-05-12',
+                        'lot_number' => 'TET2020',
                         'next_dose_date' => '2025-05-12',
                         'doctor_email' => 'dr.devries@example.com'
                     ]
@@ -79,16 +82,16 @@ class PatientSeeder extends Seeder
                 'blood_type' => 'AB+',
                 'vaccinations' => [
                     [
-                        'vaccine_name' => 'BMR', 
-                        'administration_date' => '2019-06-15', 
-                        'lot_number' => 'MMR2019', 
+                        'vaccine_name' => 'BMR',
+                        'administration_date' => '2019-06-15',
+                        'lot_number' => 'MMR2019',
                         'next_dose_date' => null,
                         'doctor_email' => 'dr.vanveen@example.com'
                     ],
                     [
-                        'vaccine_name' => 'DKTP', 
-                        'administration_date' => '2019-07-10', 
-                        'lot_number' => 'DTAP2019', 
+                        'vaccine_name' => 'DKTP',
+                        'administration_date' => '2019-07-10',
+                        'lot_number' => 'DTAP2019',
                         'next_dose_date' => null,
                         'doctor_email' => 'dr.vanveen@example.com'
                     ]

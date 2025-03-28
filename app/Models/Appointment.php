@@ -9,6 +9,7 @@ class Appointment extends Model
     protected $fillable = [
         'patient_id',
         'doctor_id',
+        'confirmation_status',
         'scheduled_time',
         'reason',
         'status_id',
@@ -43,5 +44,22 @@ class Appointment extends Model
     public function checkIn()
     {
         return $this->hasOne(CheckIn::class);
+    }
+
+
+    public function confirm()
+    {
+        $this->update(['confirmation_status' => 'confirmed']);
+    }
+
+    public function reschedule($newTime)
+    {
+        $this->update(['scheduled_time' => $newTime]);
+    }
+
+    public function cancel()
+    {
+        $this->update(['confirmation_status' => 'cancelled']);
+        $this->delete(); // Delete the appointment after marking it as cancelled
     }
 }

@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained();
-            $table->foreignId('doctor_id')->constrained();
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
             $table->dateTime('scheduled_time');
+
             $table->string('reason');
             $table->foreignId('status_id')->constrained('appointment_statuses');
-            $table->text('notes')->nullable();
+            $table->text('notes')->nullable(); // For additional notes
+            $table->enum('confirmation_status', ['pending', 'confirmed', 'cancelled'])->default('pending'); // For confirmation
             $table->timestamps();
             $table->softDeletes();
         });

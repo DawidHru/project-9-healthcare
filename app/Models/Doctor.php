@@ -44,4 +44,9 @@ class Doctor extends Model
     {
         return $this->hasMany(Referral::class, 'doctor_id');
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class); // Link to the Schedule model
+    }
 }

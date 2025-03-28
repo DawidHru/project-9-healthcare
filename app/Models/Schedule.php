@@ -18,4 +18,11 @@ class Schedule extends Model
     {
         return $this->belongsTo(Staff::class);
     }
+
+    public function isAvailable($startTime, $endTime)
+    {
+        return !$this->where('start_time', '<=', $endTime)
+            ->where('end_time', '>=', $startTime)
+            ->exists();
+    }
 }
