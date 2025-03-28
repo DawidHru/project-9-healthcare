@@ -10,11 +10,12 @@ return new class extends Migration
     {
         Schema::create('equipment_reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('staff_id')->constrained();
-            $table->foreignId('equipment_id')->constrained('medical_equipment');
+            $table->foreignId('staff_id')->constrained()->onDelete('cascade');
+            $table->foreignId('equipment_id')->constrained('medical_equipment')->onDelete('cascade');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->string('purpose');
+            $table->enum('status', ['pending', 'approved', 'rejected', 'completed'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

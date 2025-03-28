@@ -68,7 +68,7 @@ class VaccinationController extends Controller
         
         $vaccination->update($validated);
         
-        return redirect()->route('vaccinations.index')
+        return redirect()->route('vaccinations.show', $vaccination)
         ->with('success', 'Vaccination record updated successfully.');
     }
 
@@ -81,14 +81,17 @@ class VaccinationController extends Controller
     }
 
     // Patient-specific methods
-    public function patientHistory(Patient $patient)
+    public function patientHistory(Patient $patient, Request $request)
     {
         $vaccinations = Vaccination::where('patient_id', $patient->id)
             ->with('doctor')
             ->orderBy('administration_date', 'desc')
             ->get();
-            
-        return view('vaccinations.patient.history', compact('vaccinations', 'patient'));
+
+        // Haal het vaccinatie-ID op uit de queryparameters
+        $vaccinationId = $request->query('vaccination_id');
+
+        return view('vaccinations.patient.history', compact('vaccinations', 'patient', 'vaccinationId'));
     }
 
     public function upcomingVaccines(Patient $patient)
@@ -132,7 +135,9 @@ class VaccinationController extends Controller
     {
         // This is a simplified example - you would implement actual vaccine recommendations
         // based on age, health status, existing vaccinations, etc.
-        $age = $patient->date_of_birth->age;
+        $birthTimestamp = strtotime($patient->date_of_birth); // Zet de geboortedatum om naar een timestamp
+        $currentTimestamp = time(); // Huidige timestamp
+        $age = floor(($currentTimestamp - $birthTimestamp) / (365 * 24 * 60 * 60)); // Bereken het verschil in jaren
         $recommended = [];
         
         if ($age < 2) {

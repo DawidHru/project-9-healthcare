@@ -15,15 +15,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Eerst departments aanmaken
-        
+        $this->call([
+            DepartmentSeeder::class,
+            DoctorSeeder::class,
+            PatientSeeder::class,
+            // AppointmentStatusSeeder::class,
+            // AppointmentSeeder::class,
+        ]);
 
-        // Artsen aanmaken
-        
-
-        // Patiënten met vaccinaties
-
-        // Aanvullende testpatiënten zonder vaccinaties
         for ($i = 1; $i <= 10; $i++) {
             $user = User::firstOrCreate(
                 ['email' => 'patient'.$i.'@example.com'],
