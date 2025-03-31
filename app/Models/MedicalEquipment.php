@@ -27,7 +27,7 @@ class MedicalEquipment extends Model
 
     public function activeReservation()
     {
-        return $this->hasOne(EquipmentReservation::class)
+        return $this->hasOne(EquipmentReservation::class, 'equipment_id')
             ->where('start_time', '<=', now())
             ->where('end_time', '>=', now())
             ->where('status', 'approved');

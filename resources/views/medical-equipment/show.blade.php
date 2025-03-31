@@ -6,10 +6,16 @@
 <div class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">{{ $equipment->name }}</h1>
+            <h1 class="text-2xl font-bold text-white">{{ $equipment->name }}</h1>
             <p class="text-gray-600">{{ $equipment->type }} • Serial: {{ $equipment->serial_number }}</p>
         </div>
         <div class="flex space-x-2">
+            <a href="{{ route('medical-equipment.index') }}" class="text-white hover:text-gray-500 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                Terug naar overzicht
+            </a>
             <a href="{{ route('medical-equipment.edit', $equipment) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
@@ -81,11 +87,6 @@
                             <p class="mt-1 text-sm text-gray-900">{{ $equipment->location }}</p>
                         </div>
                     </div>
-                    
-                    <div class="mt-6">
-                        <h3 class="text-sm font-medium text-gray-500">Description</h3>
-                        <p class="mt-1 text-sm text-gray-900">{{ $equipment->description ?? 'No description provided' }}</p>
-                    </div>
                 </div>
             </div>
             
@@ -106,10 +107,6 @@
                                 <label for="next_maintenance" class="block text-sm font-medium text-gray-700">Next Maintenance*</label>
                                 <input type="date" name="next_maintenance" id="next_maintenance" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                             </div>
-                            <div class="md:col-span-2">
-                                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
-                                <textarea name="notes" id="notes" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                            </div>
                         </div>
                         <div class="mt-6 flex justify-end">
                             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -121,24 +118,9 @@
             </div>
         </div>
         
-        <!-- Usage Instructions Card -->
-        <div>
-            <div class="bg-white rounded-lg shadow overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
-                    <h2 class="text-lg font-medium text-gray-700">Usage Instructions</h2>
-                </div>
-                <div class="p-6">
-                    @if($equipment->usage_instructions)
-                        <div class="prose prose-sm max-w-none">
-                            {!! nl2br(e($equipment->usage_instructions)) !!}
-                        </div>
-                    @else
-                        <p class="text-sm text-gray-500">No usage instructions provided.</p>
-                    @endif
-                </div>
-            </div>
+        
             
-            {{-- <!-- Current Reservation Card -->
+            <!-- Current Reservation Card -->
             @if($equipment->activeReservation)
                 <div class="bg-white rounded-lg shadow overflow-hidden mt-6">
                     <div class="px-6 py-4 border-b border-gray-200 bg-blue-50">
@@ -166,9 +148,9 @@
                 </div>
             @endif
         </div>
-    </div> --}}
+    </div> 
     
-    {{-- <!-- Reservations History -->
+    {{-- <!-- Reservations History --> --}}
     <div class="bg-white rounded-lg shadow overflow-hidden mt-6">
         <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
             <h2 class="text-lg font-medium text-gray-700">Reservation History</h2>
@@ -231,15 +213,15 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table> --}}
-                {{-- </div>
+                    </table> 
+                 </div>
                 
                 <div class="mt-4">
                     {{ $reservations->links() }}
                 </div>
             @else
                 <p class="text-sm text-gray-500">No reservation history found.</p>
-            @endif --}}
+            @endif
         </div>
     </div>
 </div>
