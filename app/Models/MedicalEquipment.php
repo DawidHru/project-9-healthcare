@@ -22,7 +22,7 @@ class MedicalEquipment extends Model
 
     public function reservations()
     {
-        return $this->hasMany(EquipmentReservation::class);
+        return $this->hasMany(EquipmentReservation::class, 'equipment_id');
     }
 
     public function activeReservation()

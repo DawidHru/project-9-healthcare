@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Patient;
 use App\Models\Doctor;
 use App\Models\Department;
+use App\Models\MedicalEquipment;
 use App\Models\Vaccination;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +21,10 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             DoctorSeeder::class,
             PatientSeeder::class,
-            // AppointmentStatusSeeder::class,
-            // AppointmentSeeder::class,
+            VaccinationSeeder::class,
+            AppointmentStatusSeeder::class,
+            AppointmentSeeder::class,
+            MedicalEquipmentSeeder::class,
         ]);
 
         for ($i = 1; $i <= 10; $i++) {

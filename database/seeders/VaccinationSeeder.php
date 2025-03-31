@@ -15,38 +15,52 @@ class VaccinationSeeder extends Seeder
      */
     public function run(): void
     {
-        // Voorbeeld: Haal een specifieke patiënt op (pas dit aan naar jouw situatie)
+        // Haal een specifieke patiënt op
         $patient = Patient::first(); // Haal de eerste patiënt op uit de database
 
         if (!$patient) {
-            // Als er geen patiënt is, geef een foutmelding of stop de seeder
             throw new \Exception('Geen patiënt gevonden in de database.');
         }
 
-        if (isset($patientData['vaccinations'])) {
-            foreach ($patientData['vaccinations'] as $vaccinationData) {
-                $doctor = Doctor::whereHas('user', function($q) use ($vaccinationData) {
-                    $q->where('email', $vaccinationData['doctor_email']);
-                })->first();
+        // Voorbeeldgegevens voor vaccinaties
+        $vaccinationData = [
+            [
+                'vaccine_name' => 'COVID-19 Vaccine',
+                'administration_date' => '2025-03-01',
+                'lot_number' => 'ABC123',
+                'next_dose_date' => '2025-06-01',
+                'doctor_email' => 'doctor1@example.com',
+            ],
+            [
+                'vaccine_name' => 'Influenza Vaccine',
+                'administration_date' => '2025-02-15',
+                'lot_number' => 'XYZ789',
+                'next_dose_date' => null,
+                'doctor_email' => 'doctor2@example.com',
+            ],
+        ];
 
-                if (!$doctor) {
-                    // Als de dokter niet wordt gevonden, sla deze iteratie over
-                    continue;
-                }
+        foreach ($vaccinationData as $data) {
+            $doctor = Doctor::whereHas('user', function ($q) use ($data) {
+                $q->where('email', $data['doctor_email']);
+            })->first();
 
-                Vaccination::firstOrCreate(
-                    [
-                        'patient_id' => $patient->id,
-                        'doctor_id' => $doctor->id,
-                        'vaccine_name' => $vaccinationData['vaccine_name'],
-                        'administration_date' => $vaccinationData['administration_date']
-                    ],
-                    [
-                        'lot_number' => $vaccinationData['lot_number'],
-                        'next_dose_date' => $vaccinationData['next_dose_date']
-                    ]
-                );
+            if (!$doctor) {
+                continue; // Sla over als de dokter niet wordt gevonden
             }
+
+            Vaccination::firstOrCreate(
+                [
+                    'patient_id' => $patient->id,
+                    'doctor_id' => $doctor->id,
+                    'vaccine_name' => $data['vaccine_name'],
+                    'administration_date' => $data['administration_date'],
+                ],
+                [
+                    'lot_number' => $data['lot_number'],
+                    'next_dose_date' => $data['next_dose_date'],
+                ]
+            );
         }
     }
 }
