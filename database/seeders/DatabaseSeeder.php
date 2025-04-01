@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             AppointmentStatusSeeder::class,
             AppointmentSeeder::class,
             ScheduleSeeder::class,
+            InventorySeeder::class,
             MedicalEquipmentSeeder::class,
         ]);
     }
