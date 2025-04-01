@@ -15,7 +15,7 @@ class EquipmentReservationController extends Controller
             ->orderBy('start_time', 'desc')
             ->paginate(10);
             
-        return view('equipment-reservations.index', compact('reservations'));
+        return view('medical-equipment.reservations.index', compact('reservations'));
     }
 
     public function create()
@@ -57,7 +57,7 @@ class EquipmentReservationController extends Controller
 
         EquipmentReservation::create($validated);
 
-        return redirect()->route('equipment-reservations.index')
+        return redirect()->route('medical-equipment.reservations.index')
             ->with('success', 'Reservation request submitted successfully.');
     }
 
@@ -85,7 +85,7 @@ class EquipmentReservationController extends Controller
     public function destroy(EquipmentReservation $reservation)
     {
         $reservation->delete();
-        return redirect()->route('equipment-reservations.index')
+        return redirect()->route('medical-equipment.reservations.index')
             ->with('success', 'Reservation deleted successfully.');
     }
 }

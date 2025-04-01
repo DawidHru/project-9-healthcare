@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VaccinationController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -69,13 +70,13 @@ Route::prefix('medical-equipment')->group(function () {
     Route::post('/{equipment}/maintenance', [MedicalEquipmentController::class, 'logMaintenance'])->name('medical-equipment.log-maintenance');
     
     // Reservations
-    Route::get('/reservations', [EquipmentReservationController::class, 'index'])->name('equipment-reservations.index');
-    Route::get('/reservations/create', [EquipmentReservationController::class, 'create'])->name('equipment-reservations.create');
-    Route::post('/reservations', [EquipmentReservationController::class, 'store'])->name('equipment-reservations.store');
-    Route::put('/reservations/{reservation}/approve', [EquipmentReservationController::class, 'approve'])->name('equipment-reservations.approve');
-    Route::put('/reservations/{reservation}/reject', [EquipmentReservationController::class, 'reject'])->name('equipment-reservations.reject');
-    Route::get('/reservations/{reservation}', [EquipmentReservationController::class, 'show'])->name('equipment-reservations.show');
-    Route::delete('/reservations/{reservation}', [EquipmentReservationController::class, 'destroy'])->name('equipment-reservations.destroy');
+    Route::get('/reservations', [EquipmentReservationController::class, 'index'])->name('medical-equipment.reservations.index');
+    Route::get('/reservations/create', [EquipmentReservationController::class, 'create'])->name('medical-equipment.reservations.create');
+    Route::post('/reservations', [EquipmentReservationController::class, 'store'])->name('medical-equipment.reservations.store');
+    Route::put('/reservations/{reservation}/approve', [EquipmentReservationController::class, 'approve'])->name('medical-equipment.reservations.approve');
+    Route::put('/reservations/{reservation}/reject', [EquipmentReservationController::class, 'reject'])->name('medical-equipment.reservations.reject');
+    Route::get('/reservations/{reservation}', [EquipmentReservationController::class, 'show'])->name('medical-equipment.reservations.show');
+    Route::delete('/reservations/{reservation}', [EquipmentReservationController::class, 'destroy'])->name('medical-equipment.reservations.destroy');
     
     // Reports
     Route::get('/reports/maintenance', [MedicalEquipmentController::class, 'maintenanceReport'])->name('medical-equipment.maintenance-report');
@@ -84,8 +85,3 @@ Route::prefix('medical-equipment')->group(function () {
 
 
 require __DIR__.'/auth.php';
-// require __DIR__.'/auth.php';
-
-
-
-require __DIR__ . '/auth.php';
