@@ -10,11 +10,9 @@ return new class extends Migration
     {
         Schema::create('supply_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('staff_id')->constrained();
             $table->foreignId('item_id')->constrained('inventory_items');
             $table->integer('quantity');
             $table->enum('status', ['pending', 'approved', 'rejected', 'fulfilled']);
-            $table->text('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

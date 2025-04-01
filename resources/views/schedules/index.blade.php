@@ -1,4 +1,4 @@
-{{-- <x-base> --}}
+<x-base>
 <div class="container">
     <h1 style="margin-top: 20px">Schedules per department</h1>
     <a href="schedules/create" class="btn btn-primary mb-3" style="width: 200px;">Add a schedule</a>
@@ -36,4 +36,4 @@
         </tbody>
     </table>
 </div>
-{{-- </x-base> --}}
+</x-base>

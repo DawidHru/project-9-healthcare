@@ -22,11 +22,11 @@ class InventoryItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|date_format:Y-m-d', 
-            'category' => 'required|date_format:H:i',
-            'quantity' => 'required|date_format:H:i|after:start_time', 
-            'location' => 'required|exists:departments,id',
-            'threshold;' => 'required|exists:departments,id',
+            'name' => 'nullable|string|max:255', 
+            'category' => 'required|string|max:255',
+            'quantity' => 'required|integer|min:0', 
+            'location' => 'required|string|max:255',
+            'threshold;' => 'required|integer|min:1',
         ];
     }
 }

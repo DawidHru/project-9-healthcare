@@ -7,17 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class SupplyRequest extends Model
 {
     protected $fillable = [
-        'staff_id',
         'item_id',
         'quantity',
-        'status',
-        'reason'
+        'status'
     ];
-
-    public function staff()
-    {
-        return $this->belongsTo(Staff::class);
-    }
 
     public function inventoryItem()
     {

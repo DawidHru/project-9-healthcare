@@ -1,4 +1,4 @@
-{{-- <x-base> --}}
+<x-base>
         <div class="container">
             <h1 style="margin-top: 20px">Add a department's schedule</h1>
             <form action="{{ route('schedules.store') }}" method="POST" class="container mt-5 mb-9">
@@ -35,4 +35,4 @@
                 </h1>
             </div>
         @endif
-    {{-- </x-base> --}}
+    </x-base>

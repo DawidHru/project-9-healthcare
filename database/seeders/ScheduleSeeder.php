@@ -16,7 +16,7 @@ class ScheduleSeeder extends Seeder
         $schedules =
         [
             [
-                // 'staff_id'   => '1',
+                'doctor_id'   => '1',
                 'department_id'   => '1',
                 'date'       => '01-01-1970',
                 'start_time' => '09:00',
@@ -24,7 +24,7 @@ class ScheduleSeeder extends Seeder
             ],
 
             [
-                // 'staff_id'   => '1',
+                'doctor_id'   => '1',
                 'department_id'   => '2',
                 'date'       => '02-02-1970',
                 'start_time' => '02:00',
@@ -32,7 +32,7 @@ class ScheduleSeeder extends Seeder
             ],
 
             [
-                // 'staff_id'   => '1',
+                'doctor_id'   => '1',
                 'department_id'   => '3',
                 'date'       => '03-03-1973',
                 'start_time' => '03:00',

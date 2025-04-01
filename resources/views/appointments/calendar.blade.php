@@ -103,6 +103,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="calendar-container">
         <div class="header-section">

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('category');
             $table->integer('quantity');
             $table->string('location');
-            $table->integer('threshold');
+            $table->integer('threshold')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

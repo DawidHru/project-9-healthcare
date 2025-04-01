@@ -13,27 +13,27 @@ class InventorySeeder extends Seeder
         $inventory =
         [
             [
-                'name'   => 'test',
+                'name'   => 'test 1',
                 'category'   => 'test',
-                'quantity'       => 'test',
+                'quantity'       => '124',
                 'location' => 'testets',
-                'threshold'   => 'test',
+                'threshold'   => '1',
             ],
 
             [
-                'name'   => 'test',
+                'name'   => 'test 2 ',
                 'category'   => 'test',
-                'quantity'       => 'test',
+                'quantity'       => '75',
                 'location' => 'testets',
-                'threshold'   => 'test',
+                'threshold'   => '5',
             ],
 
             [
-                'name'   => 'test',
+                'name'   => 'test 3',
                 'category'   => 'test',
-                'quantity'       => 'test',
+                'quantity'       => '38',
                 'location' => 'testets',
-                'threshold'   => 'test',
+                'threshold'   => '10',
             ]
         ];
             DB::table('inventory_items')->insert($inventory);
