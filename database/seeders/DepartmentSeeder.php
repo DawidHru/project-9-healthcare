@@ -14,11 +14,31 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         $departments = [
-            ['name' => 'Huisartsenpraktijk', 'location' => 'Begane grond, links'],
-            ['name' => 'Pediatrie', 'location' => 'Eerste verdieping, rechts'],
-            ['name' => 'Interne Geneeskunde', 'location' => 'Tweede verdieping'],
-            ['name' => 'Chirurgie', 'location' => 'Begane grond, rechts'],
-            ['name' => 'Gynaecologie', 'location' => 'Eerste verdieping, links']
+            [
+                'name' => 'Huisartsenpraktijk',
+                'location' => 'Begane grond, links',
+                'work_days'   => 'Monday - Saturday',
+            ],
+            [
+                'name' => 'Pediatrie', 
+                'location' => 'Eerste verdieping, rechts',
+                'work_days'   => 'Monday - Saturday',
+            ],
+            [
+                'name' => 'Interne Geneeskunde',
+                'location' => 'Tweede verdieping',
+                'work_days'   => 'Monday - Sunday',
+            ],
+            [
+                'name' => 'Chirurgie',
+                'location' => 'Begane grond, rechts',
+                'work_days'   => 'Monday - Friday',
+            ],
+            [
+                'name' => 'Gynaecologie',
+                'location' => 'Eerste verdieping, links',
+                'work_days'   => 'Tuesday - Saturday',
+            ],
         ];
 
         foreach ($departments as $dept) {

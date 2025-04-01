@@ -39,6 +39,58 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+<<<<<<< HEAD
+=======
+        <!-- Date of Birth -->
+        <div class="mt-4">
+            <label for="date_of_birth">Date of Birth</label>
+            <input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" required>
+        </div>
+
+        <!-- Gender -->
+        <div class="mt-4">
+            <label for="gender">Gender</label>
+            <select id="gender" class="block mt-1 w-full" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Address -->
+        <div class="mt-4">
+            <label for="address">Address</label>
+            <input id="address" class="block mt-1 w-full" type="text" name="address" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="mt-4">
+            <label for="phone">Phone</label>
+            <input id="phone" class="block mt-1 w-full" type="text" name="phone" required>
+        </div>
+
+        <!-- Emergency Contact -->
+        <div class="mt-4">
+            <label for="emergency_contact">Emergency Contact</label>
+            <input id="emergency_contact" class="block mt-1 w-full" type="text" name="emergency_contact" required>
+        </div>
+
+        <!-- Blood Type -->
+        <div class="mt-4">
+            <label for="blood_type">Blood Type</label>
+            <select id="blood_type" class="block mt-1 w-full" name="blood_type" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+        </div>
+
+>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}

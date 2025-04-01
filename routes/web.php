@@ -2,8 +2,14 @@
 
 use App\Http\Controllers\EquipmentReservationController;
 use App\Http\Controllers\MedicalEquipmentController;
+<<<<<<< HEAD
+use App\Http\Controllers\InventoryItemController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
+=======
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ProfileController;
+>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
 use App\Http\Controllers\VaccinationController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +21,28 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+<<<<<<< HEAD
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+//schedule links
+Route::name("schedules.")->group(function(){
+    Route::prefix("schedules")->group(function(){        
+        Route::get('/',                      [ScheduleController::class, 'index'      ])->name('index');
+        Route::get('/create',                [ScheduleController::class, 'create'     ])->name('create');
+        Route::post('/',                     [ScheduleController::class, 'store'      ])->name('store');
+        Route::get('/{id}',                  [ScheduleController::class, 'show'       ])->name('show');
+        Route::get('/edit/{id}',             [ScheduleController::class, 'edit'       ])->name('edit');
+        Route::post('/update/{id}',          [ScheduleController::class, 'update'     ])->name('update');
+        Route::delete('/{id}/destroy',       [ScheduleController::class, 'destroy'    ])->name('destroy');
+    });
+});
+=======
+>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,6 +68,16 @@ Route::post('/appointments/{appointment}/cancel', [AppointmentController::class,
 # VACCINATIONS ROUTES
 Route::prefix('vaccinations')->group(function () {
     // Reminders
+<<<<<<< HEAD
+    Route::get('/reminders',            [VaccinationController::class, 'reminders'])->name('vaccinations.reminders');
+    Route::get('/',                     [VaccinationController::class, 'index'])->name('vaccinations.index');
+    Route::get('/create',               [VaccinationController::class, 'create'])->name('vaccinations.create');
+    Route::post('/',                    [VaccinationController::class, 'store'])->name('vaccinations.store');
+    Route::get('/{vaccination}',        [VaccinationController::class, 'show'])->name('vaccinations.show');
+    Route::get('/{vaccination}/edit',   [VaccinationController::class, 'edit'])->name('vaccinations.edit');
+    Route::put('/{vaccination}',        [VaccinationController::class, 'update'])->name('vaccinations.update');
+    Route::delete('/{vaccination}',     [VaccinationController::class, 'destroy'])->name('vaccinations.destroy');
+=======
     Route::get('/reminders', [VaccinationController::class, 'reminders'])->name('vaccinations.reminders');
     Route::get('/', [VaccinationController::class, 'index'])->name('vaccinations.index');
     Route::get('/create', [VaccinationController::class, 'create'])->name('vaccinations.create');
@@ -48,13 +86,31 @@ Route::prefix('vaccinations')->group(function () {
     Route::get('/{vaccination}/edit', [VaccinationController::class, 'edit'])->name('vaccinations.edit');
     Route::put('/{vaccination}', [VaccinationController::class, 'update'])->name('vaccinations.update');
     Route::delete('/{vaccination}', [VaccinationController::class, 'destroy'])->name('vaccinations.destroy');
+>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
 
     // Patient-specific routes
-    Route::get('/patients/{patient}/history', [VaccinationController::class, 'patientHistory'])->name('vaccinations.patient.history');
-    Route::get('/patient/{patient}/schedule', [VaccinationController::class, 'upcomingVaccines'])->name('vaccinations.patient.schedule');
+    Route::get('/patient/{patient}',             [VaccinationController::class, 'patientHistory'])->name('vaccinations.patient.history');
+    Route::get('/patient/{patient}/schedule',    [VaccinationController::class, 'upcomingVaccines'])->name('vaccinations.patient.schedule');
     Route::get('/patient/{patient}/certificate', [VaccinationController::class, 'showCertificate'])->name('vaccinations.patient.certificate');
 });
 
+<<<<<<< HEAD
+//inventory links
+Route::name("inventory_items.")->group(function(){
+    Route::prefix("inventory_items")->group(function(){        
+        Route::get('/',                      [InventoryItemController::class, 'index'      ])->name('index');
+        Route::get('/create',                [InventoryItemController::class, 'create'     ])->name('create');
+        Route::post('/',                     [InventoryItemController::class, 'store'      ])->name('store');
+        Route::get('/{id}',                  [InventoryItemController::class, 'show'       ])->name('show');
+        Route::get('/edit/{id}',             [InventoryItemController::class, 'edit'       ])->name('edit');
+        Route::post('/update/{id}',          [InventoryItemController::class, 'update'     ])->name('update');
+        Route::delete('/{id}/destroy',       [InventoryItemController::class, 'destroy'    ])->name('destroy');
+    });
+});
+
+
+require __DIR__.'/auth.php';
+=======
 # MEDICAL EQUIPMENT ROUTES
 Route::prefix('medical-equipment')->group(function () {
     // Equipment Management
@@ -84,4 +140,4 @@ Route::prefix('medical-equipment')->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0

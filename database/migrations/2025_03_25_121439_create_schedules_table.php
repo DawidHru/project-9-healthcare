@@ -10,12 +10,13 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('staff_id')->constrained();
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
-            $table->enum('shift_type', ['morning', 'afternoon', 'evening', 'night']);
+            $table->foreignId('staff_id')->nullable()->constrained('staff')->onDelete('cascade');
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
+            $table->date('date')->nullable();
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes(); 
         });
     }
 

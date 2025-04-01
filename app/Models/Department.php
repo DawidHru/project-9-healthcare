@@ -17,4 +17,9 @@ class Department extends Model
     {
         return $this->hasMany(Doctor::class);
     }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }
