@@ -16,8 +16,10 @@ class MedicalEquipment extends Model
         'location'
     ];
 
-    protected $dates = [
-        'purchase_date', 'last_maintenance', 'next_maintenance'
+    protected $casts = [
+        'purchase_date' => 'date',
+        'last_maintenance' => 'date',
+        'next_maintenance' => 'date',
     ];
 
     public function reservations()

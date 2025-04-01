@@ -85,6 +85,12 @@ class EquipmentReservationController extends Controller
     public function destroy(EquipmentReservation $reservation)
     {
         $reservation->delete();
+
+        $reservation->equipment()->update(['status' => 'available']);
+        // Optionally, you can restore the equipment status if it was in use
+        // $reservation->equipment()->restore();
+        // Or you can set it to a different status if needed
+        // $reservation->equipment()->update(['status' => 'available']);
         return redirect()->route('medical-equipment.reservations.index')
             ->with('success', 'Reservation deleted successfully.');
     }

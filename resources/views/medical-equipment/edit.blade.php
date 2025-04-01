@@ -41,24 +41,24 @@
                     
                     <div>
                         <label for="purchase_date" class="block text-sm font-medium text-gray-700">Purchase Date*</label>
-                        <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date', $equipment->purchase_date) }}" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date', $equipment->purchase_date)->format('Y-m-d') }}" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     
                     <div>
                         <label for="last_maintenance" class="block text-sm font-medium text-gray-700">Last Maintenance</label>
-                        <input type="date" name="last_maintenance" id="last_maintenance" value="{{ old('last_maintenance', $equipment->last_maintenance ? $equipment->last_maintenance : '') }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <input type="date" name="last_maintenance" id="last_maintenance" value="{{ old('last_maintenance', $equipment->last_maintenance ? $equipment->last_maintenance->format('Y-m-d') : '') }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     
                     <div>
                         <label for="next_maintenance" class="block text-sm font-medium text-gray-700">Next Maintenance</label>
-                        <input type="date" name="next_maintenance" id="next_maintenance" value="{{ old('next_maintenance', $equipment->next_maintenance ? $equipment->next_maintenance : '') }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <input type="date" name="next_maintenance" id="next_maintenance" value="{{ old('next_maintenance', $equipment->next_maintenance ? $equipment->next_maintenance->format('Y-m-d') : '') }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     
                     <div>
                         <label for="status" class="block text-sm font-medium text-gray-700">Status*</label>
                         <select name="status" id="status" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                             <option value="available" {{ old('status', $equipment->status) == 'available' ? 'selected' : '' }}>Available</option>
-                            <option value="in_use" {{ old('status', $equipment->status) == 'in_use' ? 'selected' : '' }}>In Use</option>
+                            {{-- <option value="in_use" {{ old('status', $equipment->status) == 'in_use' ? 'selected' : '' }}>In Use</option> --}}
                             <option value="maintenance" {{ old('status', $equipment->status) == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
                             <option value="retired" {{ old('status', $equipment->status) == 'retired' ? 'selected' : '' }}>Retired</option>
                         </select>
