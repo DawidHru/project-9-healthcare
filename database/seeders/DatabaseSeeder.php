@@ -27,24 +27,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DepartmentSeeder::class,
+            UserSeeder::class,
+            StaffSeeder::class,
             DoctorSeeder::class,
             PatientSeeder::class,
             VaccinationSeeder::class,
             AppointmentStatusSeeder::class,
             AppointmentSeeder::class,
-            MedicalEquipmentSeeder::class,
-        ]);
-
-
-        // Artsen aanmaken
-
-
-        $this->call([
-            PatientSeeder::class,
-            DepartmentSeeder::class,
-            VaccinationSeeder::class,
             ScheduleSeeder::class,
-            DoctorSeeder::class,
+            MedicalEquipmentSeeder::class,
         ]);
     }
 }

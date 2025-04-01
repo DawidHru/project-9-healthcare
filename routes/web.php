@@ -2,14 +2,10 @@
 
 use App\Http\Controllers\EquipmentReservationController;
 use App\Http\Controllers\MedicalEquipmentController;
-<<<<<<< HEAD
 use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
-=======
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\ProfileController;
->>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
 use App\Http\Controllers\VaccinationController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +17,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-<<<<<<< HEAD
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,8 +36,6 @@ Route::name("schedules.")->group(function(){
         Route::delete('/{id}/destroy',       [ScheduleController::class, 'destroy'    ])->name('destroy');
     });
 });
-=======
->>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,7 +61,6 @@ Route::post('/appointments/{appointment}/cancel', [AppointmentController::class,
 # VACCINATIONS ROUTES
 Route::prefix('vaccinations')->group(function () {
     // Reminders
-<<<<<<< HEAD
     Route::get('/reminders',            [VaccinationController::class, 'reminders'])->name('vaccinations.reminders');
     Route::get('/',                     [VaccinationController::class, 'index'])->name('vaccinations.index');
     Route::get('/create',               [VaccinationController::class, 'create'])->name('vaccinations.create');
@@ -77,16 +69,6 @@ Route::prefix('vaccinations')->group(function () {
     Route::get('/{vaccination}/edit',   [VaccinationController::class, 'edit'])->name('vaccinations.edit');
     Route::put('/{vaccination}',        [VaccinationController::class, 'update'])->name('vaccinations.update');
     Route::delete('/{vaccination}',     [VaccinationController::class, 'destroy'])->name('vaccinations.destroy');
-=======
-    Route::get('/reminders', [VaccinationController::class, 'reminders'])->name('vaccinations.reminders');
-    Route::get('/', [VaccinationController::class, 'index'])->name('vaccinations.index');
-    Route::get('/create', [VaccinationController::class, 'create'])->name('vaccinations.create');
-    Route::post('/', [VaccinationController::class, 'store'])->name('vaccinations.store');
-    Route::get('/vaccinations/{vaccination}', [VaccinationController::class, 'show'])->name('vaccinations.show');
-    Route::get('/{vaccination}/edit', [VaccinationController::class, 'edit'])->name('vaccinations.edit');
-    Route::put('/{vaccination}', [VaccinationController::class, 'update'])->name('vaccinations.update');
-    Route::delete('/{vaccination}', [VaccinationController::class, 'destroy'])->name('vaccinations.destroy');
->>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
 
     // Patient-specific routes
     Route::get('/patient/{patient}',             [VaccinationController::class, 'patientHistory'])->name('vaccinations.patient.history');
@@ -94,7 +76,6 @@ Route::prefix('vaccinations')->group(function () {
     Route::get('/patient/{patient}/certificate', [VaccinationController::class, 'showCertificate'])->name('vaccinations.patient.certificate');
 });
 
-<<<<<<< HEAD
 //inventory links
 Route::name("inventory_items.")->group(function(){
     Route::prefix("inventory_items")->group(function(){        
@@ -108,25 +89,23 @@ Route::name("inventory_items.")->group(function(){
     });
 });
 
-
-require __DIR__.'/auth.php';
-=======
 # MEDICAL EQUIPMENT ROUTES
 Route::prefix('medical-equipment')->group(function () {
     // Equipment Management
     Route::get('/', [MedicalEquipmentController::class, 'index'])->name('medical-equipment.index');
     Route::get('/create', [MedicalEquipmentController::class, 'create'])->name('medical-equipment.create');
     Route::post('/', [MedicalEquipmentController::class, 'store'])->name('medical-equipment.store');
-    Route::get('/{equipment}', [MedicalEquipmentController::class, 'show'])->name('medical-equipment.show');
-    Route::get('/{equipment}/edit', [MedicalEquipmentController::class, 'edit'])->name('medical-equipment.edit');
-    Route::put('/{equipment}', [MedicalEquipmentController::class, 'update'])->name('medical-equipment.update');
-    Route::delete('/{equipment}', [MedicalEquipmentController::class, 'destroy'])->name('medical-equipment.destroy');
+
+    Route::get('/equipment/{equipment}', [MedicalEquipmentController::class, 'show'])->name('medical-equipment.show');
+    Route::get('/equipment/{equipment}/edit', [MedicalEquipmentController::class, 'edit'])->name('medical-equipment.edit');
+    Route::put('/equipment/{equipment}', [MedicalEquipmentController::class, 'update'])->name('medical-equipment.update');
+    Route::delete('/equipment/{equipment}', [MedicalEquipmentController::class, 'destroy'])->name('medical-equipment.destroy');
     
     // Maintenance
     Route::post('/{equipment}/maintenance', [MedicalEquipmentController::class, 'logMaintenance'])->name('medical-equipment.log-maintenance');
     
     // Reservations
-    Route::get('/reservations', [EquipmentReservationController::class, 'index'])->name('medical-equipment.reservations.index');
+    Route::get('reservations', [EquipmentReservationController::class, 'index'])->name('medical-equipment.reservations.index');
     Route::get('/reservations/create', [EquipmentReservationController::class, 'create'])->name('medical-equipment.reservations.create');
     Route::post('/reservations', [EquipmentReservationController::class, 'store'])->name('medical-equipment.reservations.store');
     Route::put('/reservations/{reservation}/approve', [EquipmentReservationController::class, 'approve'])->name('medical-equipment.reservations.approve');
@@ -140,4 +119,4 @@ Route::prefix('medical-equipment')->group(function () {
 });
 
 
-require __DIR__.'/auth.php';>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
+require __DIR__.'/auth.php';

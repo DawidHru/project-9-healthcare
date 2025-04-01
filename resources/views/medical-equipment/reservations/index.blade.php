@@ -3,8 +3,8 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Equipment Reservations</h1>
-        <a href="{{ route('equipment-reservations.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
+        <h1 class="text-2xl font-bold text-white">Equipment Reservations</h1>
+        <a href="{{ route('medical-equipment.reservations.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
@@ -70,11 +70,11 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-900">
-                                {{ $reservation->start_time->format('M d, Y H:i') }} - 
-                                {{ $reservation->end_time->format('M d, Y H:i') }}
+                                {{ $reservation->start_time }} - 
+                                {{ $reservation->end_time }}
                             </div>
                             <div class="text-sm text-gray-500">
-                                {{ $reservation->start_time->diffForHumans() }}
+                                {{ $reservation->start_time }}
                             </div>
                         </td>
                         <td class="px-6 py-4">
@@ -101,14 +101,14 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
-                                <a href="{{ route('equipment-reservations.show', $reservation) }}" class="text-blue-600 hover:text-blue-900" title="View">
+                                <a href="{{ route('medical-equipment.reservations.show', $reservation) }}" class="text-blue-600 hover:text-blue-900" title="View">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                         <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                                     </svg>
                                 </a>
                                 @if($reservation->status == 'pending')
-                                    <form action="{{ route('equipment-reservations.approve', $reservation) }}" method="POST">
+                                    <form action="{{ route('medical-equipment.reservations.approve', $reservation) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="text-green-600 hover:text-green-900" title="Approve">
@@ -117,7 +117,7 @@
                                             </svg>
                                         </button>
                                     </form>
-                                    <form action="{{ route('equipment-reservations.reject', $reservation) }}" method="POST">
+                                    <form action="{{ route('medical-equipment.reservations.reject', $reservation) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="text-red-600 hover:text-red-900" title="Reject">
@@ -127,7 +127,7 @@
                                         </button>
                                     </form>
                                 @endif
-                                <form action="{{ route('equipment-reservations.destroy', $reservation) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this reservation?');">
+                                <form action="{{ route('medical-equipment.reservations.destroy', $reservation) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this reservation?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900" title="Delete">

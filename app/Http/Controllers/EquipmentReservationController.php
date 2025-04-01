@@ -24,17 +24,17 @@ class EquipmentReservationController extends Controller
             ->orderBy('name')
             ->get();
             
-        return view('equipment-reservations.create', compact('equipment'));
+        return view('medical-equipment.reservations.create', compact('equipment'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'equipment_id' => 'required|exists:medical_equipment,id',
+            'staff_id' => 'required',
             'start_time' => 'required|date|after_or_equal:now',
             'end_time' => 'required|date|after:start_time',
-            'purpose' => 'required|string|max:255',
-            'notes' => 'nullable|string'
+            'purpose' => 'required|string|max:255'
         ]);
 
         // Check for overlapping reservations
@@ -79,7 +79,7 @@ class EquipmentReservationController extends Controller
 
     public function show(EquipmentReservation $reservation)
     {
-        return view('equipment-reservations.show', compact('reservation'));
+        return view('medical-equipment.reservations.show', compact('reservation'));
     }
 
     public function destroy(EquipmentReservation $reservation)
