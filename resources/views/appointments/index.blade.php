@@ -77,18 +77,28 @@
 <body>
     <div class="container">
         <h1>Appointments</h1>
+<br>
+<br>
+<br>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <form method="GET" action="{{ route('appointments.index') }}" style="margin: 0;">
+                <label for="patient_id">Filter by Patient:</label>
+                <select name="patient_id" id="patient_id" onchange="this.form.submit()">
+                    <option value="">All Patients</option>
+                    @foreach ($patients as $patient)
+                        <option value="{{ $patient->id }}" {{ request('patient_id') == $patient->id ? 'selected' : '' }}>
+                            {{ $patient->user->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
 
-        <form method="GET" action="{{ route('appointments.index') }}">
-            <label for="patient_id">Filter by Patient:</label>
-            <select name="patient_id" id="patient_id" onchange="this.form.submit()">
-                <option value="">All Patients</option>
-                @foreach ($patients as $patient)
-                    <option value="{{ $patient->id }}" {{ request('patient_id') == $patient->id ? 'selected' : '' }}>
-                        {{ $patient->user->name }}
-                    </option>
-                @endforeach
-            </select>
-        </form>
+            <a href="{{ route('appointments.create') }}" style="text-decoration: none;">
+                <button type="button" style="background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">
+                    Create Appointment
+                </button>
+            </a>
+        </div>
 
         <table>
             <thead>

@@ -22,10 +22,11 @@ class ScheduleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'nullable|date_format:Y-m-d', 
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time', 
+            'date'          => 'nullable|date_format:Y-m-d', 
+            'start_time'    => 'required|date_format:H:i',
+            'end_time'      => 'required|date_format:H:i|after:start_time', 
             'department_id' => 'required|exists:departments,id',
+            'doctor_id'     => 'required|exists:doctor,id',
         ];
     }
 }

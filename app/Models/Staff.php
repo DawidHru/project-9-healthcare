@@ -10,7 +10,9 @@ class Staff extends Model
         'user_id',
         'position',
         'department_id',
-        'employee_id'
+        'employee_id',
+        'phone',
+        'bio'
     ];
 
     public function user()

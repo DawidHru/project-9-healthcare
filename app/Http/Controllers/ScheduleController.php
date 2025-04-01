@@ -62,6 +62,7 @@ class ScheduleController extends Controller
         $schedule->start_time     = $request->start_time;
         $schedule->end_time       = $request->end_time;
         $schedule->department_id  = $request->department_id;
+        $schedule->doctor_id      = $request->doctor_id;
         $schedule->save();
     }
 }

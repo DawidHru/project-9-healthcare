@@ -24,7 +24,7 @@ class ScheduleSeeder extends Seeder
             ],
 
             [
-                'doctor_id'   => '1',
+                'doctor_id'   => '2',
                 'department_id'   => '2',
                 'date'       => '02-02-1970',
                 'start_time' => '02:00',
@@ -32,7 +32,7 @@ class ScheduleSeeder extends Seeder
             ],
 
             [
-                'doctor_id'   => '1',
+                'doctor_id'   => '3',
                 'department_id'   => '3',
                 'date'       => '03-03-1973',
                 'start_time' => '03:00',

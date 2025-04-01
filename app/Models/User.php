@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Staff::class);
     }
+
+    public function labTechnician()
+    {
+        return $this->hasOneThrough(LabTechnician::class, Staff::class);
+    }
 }

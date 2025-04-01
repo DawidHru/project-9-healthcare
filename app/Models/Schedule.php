@@ -21,7 +21,10 @@ class Schedule extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+
     }
+
+
     public function isAvailable($startTime, $endTime)
     {
         return !$this->where('start_time', '<=', $endTime)
