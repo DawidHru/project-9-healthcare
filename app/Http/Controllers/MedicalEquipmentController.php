@@ -123,4 +123,25 @@ class MedicalEquipmentController extends Controller
             
         return view('medical-equipment.reports.usage', compact('mostUsed'));
     }
+    
+    public function destroy(MedicalEquipment $equipment)
+    {
+        // Check if there are any active reservations
+        if ($equipment->reservations()->whereIn('status', ['pending', 'approved'])->exists()) {
+            return redirect()->route('medical-equipment.show', $equipment)
+                ->with('error', 'Cannot delete equipment with active reservations. Cancel reservations first.');
+        }
+
+        // Check if there are any open issues
+        if ($equipment->issues()->whereIn('status', ['reported', 'in_progress'])->exists()) {
+            return redirect()->route('medical-equipment.show', $equipment)
+                ->with('error', 'Cannot delete equipment with open issues. Resolve issues first.');
+        }
+
+        // Soft delete the equipment
+        $equipment->delete();
+
+        return redirect()->route('medical-equipment.index')
+            ->with('success', 'Equipment deleted successfully.');
+    }
 }
