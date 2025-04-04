@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             InventorySeeder::class,
             MedicalEquipmentSeeder::class,
-          InventorySeeder::class,
+            InventorySeeder::class,
             ScheduleSeeder::class,
 
             LabTechnicianSeeder::class,

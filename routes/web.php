@@ -6,8 +6,8 @@ use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\EquipmentIssueController;
 use App\Http\Controllers\SupplyRequestController;
-
 use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\LabResultController;
 use Illuminate\Support\Facades\Route;
@@ -134,10 +134,19 @@ Route::prefix('medical-equipment')->group(function () {
     // Reports
     Route::get('/reports/maintenance', [MedicalEquipmentController::class, 'maintenanceReport'])->name('medical-equipment.maintenance-report');
     Route::get('/reports/usage', [MedicalEquipmentController::class, 'usageReport'])->name('medical-equipment.usage-report');
+
+    // Issues
+    Route::get('/equipment-issues', [EquipmentIssueController::class, 'index'])->name('equipment-issues.index');
+    Route::get('/equipment-issues/{issue}', [EquipmentIssueController::class, 'show'])->name('equipment-issues.show');
+    Route::post('/equipment-issues/{equipment}', [EquipmentIssueController::class, 'store'])->name('equipment-issues.store');
+    Route::get('/equipment-issues/{issue}/edit', [EquipmentIssueController::class, 'edit'])->name('equipment-issues.edit');
+    Route::put('/equipment-issues/{issue}', [EquipmentIssueController::class, 'update'])->name('equipment-issues.update');
+    Route::get('/equipment-issues/create/{equipment}', [EquipmentIssueController::class, 'create'])
+        ->name('equipment-issues.create');
+    Route::post('/equipment-issues/{issue}', [EquipmentIssueController::class, 'updateStatus'])
+        ->name('equipment-issues.update-status');
 });
 
-
-require __DIR__.'/auth.php';
 //inventory links
 Route::name("supplies.")->group(function(){
     Route::prefix("supplies")->group(function(){        

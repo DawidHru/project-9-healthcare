@@ -43,15 +43,6 @@ class DoctorSeeder extends Seeder
                 'department' => 'Interne Geneeskunde',
                 'phone' => '020-3456789',
                 'bio' => 'Internist gespecialiseerd in infectieziekten.'
-            ],
-            [
-                'name' => 'Dr. Hruświcki',
-                'email' => 'cweldobicia@wp.pl',
-                'specialization' => 'Gynaecoloog',
-                'license_number' => 'D345678', 
-                'department' => 'Gynaecologie',
-                'phone' => '020-4567890',
-                'bio' => 'Gynaecoloog met ervaring in vruchtbaarheidsbehandelingen.'
             ]
         ];
 

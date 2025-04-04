@@ -224,5 +224,78 @@
             @endif
         </div>
     </div>
+    <!-- Issues Section -->
+    <div class="bg-white rounded-lg shadow overflow-hidden mt-6">
+        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
+            <h2 class="text-lg font-medium text-gray-700">Equipment Issues</h2>
+            <a href="{{ route('equipment-issues.create',['equipment' => $equipment]) }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                Report New Issue
+            </a>
+        </div>
+        
+        <div class="p-6">
+            @if($equipment->issues->count() > 0)
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reported</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Severity</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($equipment->issues as $issue)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ $issue->created_at->format('Y-m-d') }}</div>
+                                    <div class="text-sm text-gray-500">by {{ $issue->reporter->user->name }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @php
+                                        $severityColors = [
+                                            'low' => 'bg-green-100 text-green-800',
+                                            'medium' => 'bg-yellow-100 text-yellow-800',
+                                            'high' => 'bg-orange-100 text-orange-800',
+                                            'critical' => 'bg-red-100 text-red-800'
+                                        ];
+                                    @endphp
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $severityColors[$issue->severity] }}">
+                                        {{ ucfirst($issue->severity) }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @php
+                                        $statusColors = [
+                                            'reported' => 'bg-gray-100 text-gray-800',
+                                            'in_progress' => 'bg-blue-100 text-blue-800',
+                                            'resolved' => 'bg-green-100 text-green-800',
+                                            'closed' => 'bg-purple-100 text-purple-800'
+                                        ];
+                                    @endphp
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusColors[$issue->status] }}">
+                                        {{ str_replace('_', ' ', ucfirst($issue->status)) }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('equipment-issues.show', $issue) }}" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                                    @if($issue->status !== 'closed')
+                                        <a href="{{ route('equipment-issues.edit', $issue) }}" class="text-yellow-600 hover:text-yellow-900">Update</a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-sm text-gray-500">No issues reported for this equipment.</p>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection

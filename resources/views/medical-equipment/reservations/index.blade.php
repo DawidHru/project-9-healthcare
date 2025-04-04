@@ -13,7 +13,7 @@
     </div>
 
     <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+        {{-- <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
             <div class="flex justify-between items-center">
                 <h2 class="text-lg font-medium text-gray-700">All Reservations</h2>
                 <div class="flex space-x-2">
@@ -26,7 +26,7 @@
                     <input type="date" class="border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 </div>
             </div>
-        </div>
+        </div> --}}
         
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">

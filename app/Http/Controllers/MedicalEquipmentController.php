@@ -19,6 +19,8 @@ class MedicalEquipmentController extends Controller
                       ->orWhere('type', 'like', "%{$search}%")
                       ->orWhere('serial_number', 'like', "%{$search}%");
             })
+            ->orderByRaw("CASE WHEN status = 'retired' THEN 1 ELSE 0 END") // Prioriteer 'retired' naar beneden
+            ->orderBy('name') // Sorteer de rest alfabetisch op naam
             ->paginate(10);
 
         return view('medical-equipment.index', compact('medicalEquipments'));
@@ -72,7 +74,7 @@ class MedicalEquipmentController extends Controller
             'purchase_date' => 'required|date',
             'last_maintenance' => 'nullable|date',
             'next_maintenance' => 'nullable|date|after_or_equal:last_maintenance',
-            'status' => 'required|in:available,in_use,maintenance,out_of_service',
+            'status' => 'required|in:available,in_use,maintenance,retired',
             'location' => 'required|string|max:255'
         ]);
 

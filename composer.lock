@@ -6234,7 +6234,6 @@
             "time": "2025-03-19T14:43:43+00:00"
         },
         {
->>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
             "name": "laravel/breeze",
             "version": "v2.3.6",
             "source": {

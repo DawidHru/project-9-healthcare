@@ -34,4 +34,8 @@ class MedicalEquipment extends Model
             ->where('end_time', '>=', now())
             ->where('status', 'approved');
     }
+    public function issues()
+    {
+        return $this->hasMany(EquipmentIssue::class, 'equipment_id');
+    }
 }

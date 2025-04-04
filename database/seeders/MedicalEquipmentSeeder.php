@@ -28,7 +28,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'purchase_date' => Carbon::now()->subYear(),
                 'last_maintenance' => Carbon::now()->subMonths(2),
                 'next_maintenance' => Carbon::now()->addMonths(4),
-                'status' => 'in_use',
+                'status' => 'available',
                 'location' => 'Cardiology Department',
             ],
             [
@@ -88,7 +88,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'purchase_date' => Carbon::now()->subMonths(9),
                 'last_maintenance' => Carbon::now()->subMonths(2),
                 'next_maintenance' => Carbon::now()->addMonths(4),
-                'status' => 'in_use',
+                'status' => 'available',
                 'location' => 'Operating Room 1',
             ]
         ];
