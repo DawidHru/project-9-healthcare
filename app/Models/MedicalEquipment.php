@@ -13,7 +13,8 @@ class MedicalEquipment extends Model
     protected $fillable = [
         'name', 'type', 'serial_number', 'purchase_date',
         'last_maintenance', 'next_maintenance', 'status',
-        'location'
+        'location',
+        'usage_instructions'
     ];
 
     protected $casts = [

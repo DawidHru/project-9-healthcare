@@ -117,7 +117,28 @@
                 </div>
             </div>
         </div>
-        
+        <!-- Usage Instructions Card -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                <h2 class="text-lg font-medium text-gray-700">Usage Instructions</h2>
+            </div>
+            <div class="p-6">
+                @if($equipment->usage_instructions)
+                    <div class="prose max-w-none">
+                        {!! Str::markdown($equipment->usage_instructions) !!}
+                    </div>
+                @else
+                    <p class="text-sm text-gray-500">No usage instructions provided.</p>
+                    @can('update', $equipment)
+                        <div class="mt-4">
+                            <a href="{{ route('medical-equipment.edit', $equipment) }}" class="text-blue-600 hover:text-blue-800">
+                                Add Usage Instructions
+                            </a>
+                        </div>
+                    @endcan
+                @endif
+            </div>
+        </div>
         
             
             <!-- Current Reservation Card -->

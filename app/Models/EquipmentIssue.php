@@ -21,6 +21,10 @@ class EquipmentIssue extends Model
         'resolved_at'
     ];
 
+    protected $casts = [
+        'resolved_at' => 'datetime',
+    ];
+
     public function equipment()
     {
         return $this->belongsTo(MedicalEquipment::class);

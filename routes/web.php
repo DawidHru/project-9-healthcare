@@ -145,8 +145,7 @@ Route::prefix('medical-equipment')->group(function () {
     Route::put('/equipment-issues/{issue}', [EquipmentIssueController::class, 'update'])->name('equipment-issues.update');
     Route::get('/equipment-issues/create/{equipment}', [EquipmentIssueController::class, 'create'])
         ->name('equipment-issues.create');
-    Route::post('/equipment-issues/{issue}', [EquipmentIssueController::class, 'updateStatus'])
-        ->name('equipment-issues.update-status');
+    Route::post('/equipment-issues/{issue}/update-status', [EquipmentIssueController::class, 'updateStatus'])->name('equipment-issues.update-status');
 });
 
 //inventory links
@@ -158,7 +157,7 @@ Route::name("supplies.")->group(function () {
     });
 });
 
-require __DIR__.'/auth.php';                    
+                  
 // Billing routes
 Route::prefix('bills')->group(function () {
     Route::get('/', [BillingController::class, 'index'])->name('bills.index');

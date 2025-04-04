@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EquipmentIssue;
 use App\Models\MedicalEquipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EquipmentIssueController extends Controller
 {
@@ -56,33 +57,58 @@ class EquipmentIssueController extends Controller
             'issue' => $issue,
         ]);
     }
+    public function edit(EquipmentIssue $issue)
+    {
+        $issue->load(['equipment', 'reporter.user']);
+        return view('medical-equipment.issues.edit', compact('issue'));
+    }
+
+    public function update(Request $request, EquipmentIssue $issue)
+    {
+        $validated = $request->validate([
+            'description' => 'required|string',
+            'severity' => 'required|in:low,medium,high,critical'
+        ]);
+
+        $issue->update([
+            'description' => $validated['description'],
+            'severity' => $validated['severity']
+        ]);
+
+        return redirect()->route('equipment-issues.show', $issue)
+            ->with('success', 'Issue updated successfully.');
+    }
 
     public function updateStatus(Request $request, EquipmentIssue $issue)
     {
+        // Validatie van de invoer
         $validated = $request->validate([
-            'status' => 'required|in:in_progress,resolved,closed',
-            'resolution_notes' => 'required_if:status,resolved,closed|string|nullable'
+            'status' => 'required|in:reported,in_progress,resolved,closed',
+            'resolution_notes' => 'required_if:status,resolved,closed|string|nullable',
+            'resolved_by' => 'required'
         ]);
-
+        
+        // Basisupdates
         $updates = [
             'status' => $validated['status'],
-            'resolved_by' => $validated['resolved_by'],
-            'resolution_notes' => $validated['resolution_notes'] ?? null
         ];
-
-        // If resolving or closing the issue, set resolved_by and resolved_at
+        
+        
+        // Als de status 'resolved' of 'closed' is, voeg extra velden toe
         if (in_array($validated['status'], ['resolved', 'closed'])) {
-            $updates['resolved_by'] = $validated['resolved_by'] ?? null;
-            $updates['resolved_at'] = now();
+            $updates['resolved_by'] = $validated['resolved_by']; // Stel de resolver in op de huidige gebruiker als deze niet is opgegeven
+            $updates['resolved_at'] = now(); // Stel de huidige tijd in als resolved_at
+            $updates['resolution_notes'] = $validated['resolution_notes']; // Voeg de resolution notes toe
             
-            // Optionally set equipment back to available if issue is resolved
-            if ($validated['status'] === 'resolved') {
-                $issue->equipment()->update(['status' => 'available']);
-            }
+            // Optioneel: Zet de status van de apparatuur terug naar 'available'
+            $issue->equipment()->update(['status' => 'available']);
         }
-
+        
+        // Update het issue in de database
         $issue->update($updates);
-
-        return back()->with('success', 'Issue status updated successfully.');
+        
+        // Redirect terug naar de show-pagina met een succesbericht
+        return redirect()->route('equipment-issues.show', $issue)
+            ->with('success', 'Issue status updated successfully.');
     }
 }

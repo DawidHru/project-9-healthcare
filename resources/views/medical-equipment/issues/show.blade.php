@@ -122,6 +122,7 @@
                         @csrf
                         <div class="space-y-4">
                             <input type="hidden" name="resolved_by" value="1">
+                            
                             <div>
                                 <label for="status" class="block text-sm font-medium text-gray-700">Status*</label>
                                 <select name="status" id="status" required 
@@ -133,21 +134,28 @@
                                 </select>
                             </div>
                             
-                            <div id="resolutionNotesContainer" style="{{ in_array($issue->status, ['resolved', 'closed']) ? '' : 'display: none;' }}">
-                                <label for="resolution_notes" class="block text-sm font-medium text-gray-700">Resolution Notes*</label>
-                                <textarea name="resolution_notes" id="resolution_notes" rows="4" 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('resolution_notes', $issue->resolution_notes) }}</textarea>
+                            <div id="resolutionNotesContainer" style="{{ in_array($issue->status, ['in_progress', 'resolved', 'closed']) ? '' : 'display: none;' }}">
+                                <div>
+                                    <label for="resolution_notes" class="block text-sm font-medium text-gray-700">
+                                        Resolution Notes*
+                                        <span class="text-xs text-gray-500">(Required when resolving, closing, or in progress)</span>
+                                    </label>
+                                    <textarea name="resolution_notes" id="resolution_notes" rows="4"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Describe the resolution steps or final remarks...">{{ old('resolution_notes', $issue->resolution_notes) }}</textarea>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="mt-6">
-                            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-black bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Update Status
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
             
             <!-- Equipment Status Card -->
             <div class="bg-white rounded-lg shadow overflow-hidden mt-6">
@@ -199,21 +207,33 @@
     document.addEventListener('DOMContentLoaded', function() {
     const statusSelect = document.getElementById('status');
     const notesContainer = document.getElementById('resolutionNotesContainer');
+    const resolutionNotes = document.getElementById('resolution_notes');
     const form = document.querySelector('form');
     
-    statusSelect.addEventListener('change', function() {
-        if (this.value === 'resolved' || this.value === 'closed') {
+    // Toggle notes visibility based on status
+    function toggleNotesVisibility() {
+        if (statusSelect.value === 'resolved' || statusSelect.value === 'closed') {
             notesContainer.style.display = 'block';
+            resolutionNotes.required = true;
         } else {
             notesContainer.style.display = 'none';
+            resolutionNotes.required = false;
         }
-    });
-
+    }
+    
+    // Initial check
+    toggleNotesVisibility();
+    
+    // Event listener for status change
+    statusSelect.addEventListener('change', toggleNotesVisibility);
+    
+    // Form submission validation
     form.addEventListener('submit', function(e) {
         if ((statusSelect.value === 'resolved' || statusSelect.value === 'closed') && 
-            !document.getElementById('resolution_notes').value.trim()) {
+            !resolutionNotes.value.trim()) {
             e.preventDefault();
-            alert('Resolution notes are required when resolving or closing an issue');
+            alert('Please provide resolution notes when resolving or closing an issue');
+            resolutionNotes.focus();
         }
     });
 });

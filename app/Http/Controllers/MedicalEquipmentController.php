@@ -41,7 +41,8 @@ class MedicalEquipmentController extends Controller
             'last_maintenance' => 'nullable|date',
             'next_maintenance' => 'nullable|date|after_or_equal:last_maintenance',
             'status' => 'required|in:available,in_use,maintenance,out_of_service',
-            'location' => 'required|string|max:255'
+            'location' => 'required|string|max:255',
+            'usage_instructions' => 'nullable|string|max:1000'
         ]);
 
         MedicalEquipment::create($validated);
@@ -75,7 +76,8 @@ class MedicalEquipmentController extends Controller
             'last_maintenance' => 'nullable|date',
             'next_maintenance' => 'nullable|date|after_or_equal:last_maintenance',
             'status' => 'required|in:available,in_use,maintenance,retired',
-            'location' => 'required|string|max:255'
+            'location' => 'required|string|max:255',
+            'usage_instructions' => 'nullable|string|max:1000'
         ]);
 
         $equipment->update($validated);

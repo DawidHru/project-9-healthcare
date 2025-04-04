@@ -20,6 +20,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->addMonths(3),
                 'status' => 'available',
                 'location' => 'Radiology Room 1',
+                'usage_instructions' => 'Refer to the user manual for operation.',
             ],
             [
                 'name' => 'ECG Machine',
@@ -30,6 +31,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->addMonths(4),
                 'status' => 'available',
                 'location' => 'Cardiology Department',
+                'usage_instructions' => 'Ensure electrodes are properly placed on the patient.',
             ],
             [
                 'name' => 'Ventilator',
@@ -40,6 +42,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->addMonths(5),
                 'status' => 'available',
                 'location' => 'ICU Room 3',
+                'usage_instructions' => 'Adjust settings according to patient needs.',
             ],
             [
                 'name' => 'Defibrillator',
@@ -50,6 +53,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->addMonths(6),
                 'status' => 'available',
                 'location' => 'Emergency Room',
+                'usage_instructions' => 'Use only in case of cardiac arrest.',
             ],
             [
                 'name' => 'Infusion Pump',
@@ -58,8 +62,9 @@ class MedicalEquipmentSeeder extends Seeder
                 'purchase_date' => Carbon::now()->subMonths(4),
                 'last_maintenance' => null,
                 'next_maintenance' => Carbon::now()->addMonths(12),
-                'status' => 'maintenance',
+                'status' => 'available',
                 'location' => 'Maintenance Room',
+                'usage_instructions' => 'Ensure proper calibration before use.',
             ],
             [
                 'name' => 'Patient Monitor',
@@ -70,6 +75,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->subMonths(2), // Overdue
                 'status' => 'available',
                 'location' => 'Ward B',
+                'usage_instructions' => 'Monitor vital signs continuously.',
             ],
             [
                 'name' => 'X-ray Machine',
@@ -80,6 +86,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->addMonths(11),
                 'status' => 'available',
                 'location' => 'Radiology Room 2',
+                'usage_instructions' => 'Follow safety protocols during operation.',
             ],
             [
                 'name' => 'Anesthesia Machine',
@@ -90,6 +97,7 @@ class MedicalEquipmentSeeder extends Seeder
                 'next_maintenance' => Carbon::now()->addMonths(4),
                 'status' => 'available',
                 'location' => 'Operating Room 1',
+                'usage_instructions' => 'Ensure proper settings before surgery.',
             ]
         ];
 
