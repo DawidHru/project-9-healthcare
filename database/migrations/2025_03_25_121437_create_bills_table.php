@@ -13,9 +13,10 @@ return new class extends Migration
             $table->foreignId('patient_id')->constrained();
             $table->foreignId('appointment_id')->constrained('appointments');
             $table->decimal('amount', 10, 2);
-            $table->enum('status', ['pending', 'paid', 'partially_paid', 'cancelled']);
+            $table->enum('status', ['pending', 'paid', 'overdue', 'cancelled']);
             $table->date('due_date');
             $table->foreignId('insurance_id')->nullable()->constrained();
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

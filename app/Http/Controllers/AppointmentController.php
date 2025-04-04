@@ -15,14 +15,19 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         $patients = Patient::all(); // Fetch all patients for the dropdown
+        $doctors = Doctor::all(); // Fetch all doctors for the dropdown
         $query = Appointment::query();
 
         if ($request->has('patient_id') && $request->patient_id) {
             $query->where('patient_id', $request->patient_id);
         }
 
-        $appointments = $query->get(); // Fetch filtered appointments
-        return view('appointments.index', compact('appointments', 'patients'));
+        if ($request->has('doctor_id') && $request->doctor_id) {
+            $query->where('doctor_id', $request->doctor_id);
+        }
+
+        $appointments = $query->paginate(10); // Use pagination instead of get()
+        return view('appointments.index', compact('appointments', 'patients', 'doctors'));
     }
 
     // Show the form to create a new appointment
@@ -120,7 +125,10 @@ class AppointmentController extends Controller
     // Approve an appointment
     public function approve(Appointment $appointment)
     {
-        $appointment->confirm();
+        $appointment->update([
+            'confirmation_status' => 'confirmed',
+            'status_id' => 2 // 2 is the ID for 'confirmed' status
+        ]);
         return response()->json(['success' => true]);
     }
 
@@ -135,7 +143,19 @@ class AppointmentController extends Controller
     // Cancel an appointment
     public function cancel(Appointment $appointment)
     {
-        $appointment->cancel();
-        return response()->json(['success' => true]);
+        // Delete related records first
+        $appointment->virtualConsultation()->delete();
+        $appointment->checkIn()->delete();
+
+        // Update any associated bills to remove the appointment reference
+        $appointment->bill()->update(['appointment_id' => null]);
+
+        // Update the appointment status to cancelled
+        $appointment->update(['confirmation_status' => 'cancelled']);
+
+        // Finally delete the appointment
+        $appointment->delete();
+
+        return redirect()->route('appointments.index')->with('success', 'Appointment cancelled successfully.');
     }
 }

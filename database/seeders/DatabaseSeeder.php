@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         // ]);
        
          // Aanvullende testpatiënten zonder vaccinaties
+
+        // Aanvullende testpatiënten zonder vaccinaties
         for ($i = 1; $i <= 10; $i++) {
             $user = User::firstOrCreate(
                 ['email' => 'patient' . $i . '@example.com'],
@@ -65,9 +67,8 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
 
             LabTechnicianSeeder::class,
+            InsuranceSeeder::class,
+            BillSeeder::class,
         ]);
-
-
-     
     }
 }

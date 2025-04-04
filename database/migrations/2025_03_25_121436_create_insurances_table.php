@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained();
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
             $table->string('provider');
             $table->string('policy_number');
             $table->date('start_date');
             $table->date('end_date');
+            $table->json('coverage_details')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

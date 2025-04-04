@@ -8,8 +8,11 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\EquipmentIssueController;
 use App\Http\Controllers\SupplyRequestController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\LabResultController;
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\InsuranceController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,15 +31,15 @@ Route::middleware('auth')->group(function () {
 });
 
 //schedule links
-Route::name("schedules.")->group(function(){
-    Route::prefix("schedules")->group(function(){
-        Route::get('/',                      [ScheduleController::class, 'index'      ])->name('index');
-        Route::get('/create',                [ScheduleController::class, 'create'     ])->name('create');
-        Route::post('/',                     [ScheduleController::class, 'store'      ])->name('store');
-        Route::get('/{id}',                  [ScheduleController::class, 'show'       ])->name('show');
-        Route::get('/edit/{id}',             [ScheduleController::class, 'edit'       ])->name('edit');
-        Route::post('/update/{id}',          [ScheduleController::class, 'update'     ])->name('update');
-        Route::delete('/{id}/destroy',       [ScheduleController::class, 'destroy'    ])->name('destroy');
+Route::name("schedules.")->group(function () {
+    Route::prefix("schedules")->group(function () {
+        Route::get('/',                      [ScheduleController::class, 'index'])->name('index');
+        Route::get('/create',                [ScheduleController::class, 'create'])->name('create');
+        Route::post('/',                     [ScheduleController::class, 'store'])->name('store');
+        Route::get('/{id}',                  [ScheduleController::class, 'show'])->name('show');
+        Route::get('/edit/{id}',             [ScheduleController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}',          [ScheduleController::class, 'update'])->name('update');
+        Route::delete('/{id}/destroy',       [ScheduleController::class, 'destroy'])->name('destroy');
     });
 });
 
@@ -94,16 +97,15 @@ Route::resource('lab-results', LabResultController::class);
 
 
 //inventory links
-Route::name("inventory_items.")->group(function(){
-    Route::prefix("inventory_items")->group(function(){
-        Route::get('/',                      [InventoryItemController::class, 'index'      ])->name('index');
-        Route::get('/create',                [InventoryItemController::class, 'create'     ])->name('create');
-        Route::post('/',                     [InventoryItemController::class, 'store'      ])->name('store');
-        Route::get('/{id}',                  [InventoryItemController::class, 'show'       ])->name('show');
-        Route::get('/edit/{id}',             [InventoryItemController::class, 'edit'       ])->name('edit');
-        Route::post('/update/{id}',          [InventoryItemController::class, 'update'     ])->name('update');
-        Route::delete('/{id}/destroy',       [InventoryItemController::class, 'destroy'    ])->name('destroy');
-
+Route::name("inventory_items.")->group(function () {
+    Route::prefix("inventory_items")->group(function () {
+        Route::get('/',                      [InventoryItemController::class, 'index'])->name('index');
+        Route::get('/create',                [InventoryItemController::class, 'create'])->name('create');
+        Route::post('/',                     [InventoryItemController::class, 'store'])->name('store');
+        Route::get('/{id}',                  [InventoryItemController::class, 'show'])->name('show');
+        Route::get('/edit/{id}',             [InventoryItemController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}',          [InventoryItemController::class, 'update'])->name('update');
+        Route::delete('/{id}/destroy',       [InventoryItemController::class, 'destroy'])->name('destroy');
     });
 });
 
@@ -148,12 +150,40 @@ Route::prefix('medical-equipment')->group(function () {
 });
 
 //inventory links
-Route::name("supplies.")->group(function(){
-    Route::prefix("supplies")->group(function(){        
-        Route::get('/',                      [SupplyRequestController::class, 'index'       ])->name('index');
-        Route::delete('/{id}/destroy',       [SupplyRequestController::class, 'destroy'     ])->name('destroy');
-        Route::delete('/{id}/approve',       [SupplyRequestController::class, 'approve'     ])->name('approve');
+Route::name("supplies.")->group(function () {
+    Route::prefix("supplies")->group(function () {
+        Route::get('/',                      [SupplyRequestController::class, 'index'])->name('index');
+        Route::delete('/{id}/destroy',       [SupplyRequestController::class, 'destroy'])->name('destroy');
+        Route::delete('/{id}/approve',       [SupplyRequestController::class, 'approve'])->name('approve');
     });
 });
 
 require __DIR__.'/auth.php';                    
+// Billing routes
+Route::prefix('bills')->group(function () {
+    Route::get('/', [BillingController::class, 'index'])->name('bills.index');
+    Route::get('/create', [BillingController::class, 'create'])->name('bills.create');
+    Route::post('/', [BillingController::class, 'store'])->name('bills.store');
+    Route::get('/{bill}', [BillingController::class, 'show'])->name('bills.show');
+    Route::get('/{bill}/edit', [BillingController::class, 'edit'])->name('bills.edit');
+    Route::put('/{bill}', [BillingController::class, 'update'])->name('bills.update');
+    Route::delete('/{bill}', [BillingController::class, 'destroy'])->name('bills.destroy');
+    Route::post('/{bill}/payment', [BillingController::class, 'processPayment'])->name('bills.payment');
+    Route::post('/{bill}/insurance-payment', [BillingController::class, 'processInsurancePayment'])->name('bills.insurance-payment');
+    Route::get('/report', [BillingController::class, 'generateReport'])->name('bills.report');
+    Route::get('/patient/{patient}/insurances', [BillingController::class, 'getPatientInsurances'])->name('bills.patient.insurances');
+});
+
+// Insurance routes
+Route::prefix('insurance')->group(function () {
+    Route::get('/', [InsuranceController::class, 'index'])->name('insurance.index');
+    Route::get('/create', [InsuranceController::class, 'create'])->name('insurance.create');
+    Route::post('/', [InsuranceController::class, 'store'])->name('insurance.store');
+    Route::get('/{insurance}', [InsuranceController::class, 'show'])->name('insurance.show');
+    Route::get('/{insurance}/edit', [InsuranceController::class, 'edit'])->name('insurance.edit');
+    Route::put('/{insurance}', [InsuranceController::class, 'update'])->name('insurance.update');
+    Route::delete('/{insurance}', [InsuranceController::class, 'destroy'])->name('insurance.destroy');
+});
+
+require __DIR__ . '/auth.php';
+// require __DIR__.'/auth.php';

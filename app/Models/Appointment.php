@@ -16,6 +16,10 @@ class Appointment extends Model
         'notes'
     ];
 
+    protected $casts = [
+        'scheduled_time' => 'datetime'
+    ];
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);
